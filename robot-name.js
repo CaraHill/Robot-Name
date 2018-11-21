@@ -22,6 +22,10 @@ class Robot {
 
     return this.robotName;
   }
+
+  reset() {
+    this.robotName = "";
+  }
 }
 
 export default Robot
