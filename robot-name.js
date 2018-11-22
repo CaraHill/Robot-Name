@@ -1,43 +1,34 @@
 class Robot {
   constructor() {
-    this.alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    this.alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
-    this.numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    this.numbers = "1234567890".split("");
 
     this.usedNames = [];
 
-    this.robotName;
-  }
-
-  get name() {
-
-    let generatedName = this.nameGenerator();
-
-    this.robotName = this.robotName || generatedName;
-
-    return this.robotName;
+    this.name = this.generateName();
   }
 
   reset() {
-    this.robotName = "";
+    this.name = this.generateName();
   }
 
-  nameGenerator() {
-    let newName = [];
+  generateName() {
+    let newName = "";
 
-    while(this.usedNames.indexOf(newName.join("")) >= 0 || newName.length == 0){
+    while(this.usedNames.includes(newName) || newName.length == 0){
       for(let i = 0; i < 2; i++) {
-        newName.push(this.alphabet[Math.floor(Math.random()*this.alphabet.length)]);
+        newName += this.alphabet[Math.floor(Math.random()*this.alphabet.length)];
       }
 
       for(let i = 0; i < 3; i++) {
-        newName.push(this.numbers[Math.floor(Math.random()*this.numbers.length)]);
+        newName += this.numbers[Math.floor(Math.random()*this.numbers.length)];
       }
     }
 
-    this.usedNames.push(newName.join(""));
+    this.usedNames.push(newName);
 
-    return newName.join("");
+    return newName;
   }
 }
 
