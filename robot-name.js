@@ -4,10 +4,27 @@ class Robot {
 
     this.numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
+    this.usedNames = [];
+
     this.robotName;
   }
 
   get name() {
+
+    let generatedName = this.nameGenerator();
+
+    this.robotName = this.robotName || generatedName;
+
+    this.usedNames.push(this.RobotName);
+
+    return this.robotName;
+  }
+
+  reset() {
+    this.robotName = "";
+  }
+
+  nameGenerator() {
     let newName = [];
 
     for(let i = 0; i < 2; i++) {
@@ -18,13 +35,7 @@ class Robot {
       newName.push(this.numbers[Math.floor(Math.random()*this.numbers.length)]);
     }
 
-    this.robotName = this.robotName || newName.join("");
-
-    return this.robotName;
-  }
-
-  reset() {
-    this.robotName = "";
+    return newName.join("");
   }
 }
 
