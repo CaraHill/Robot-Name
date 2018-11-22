@@ -15,8 +15,6 @@ class Robot {
 
     this.robotName = this.robotName || generatedName;
 
-    this.usedNames.push(this.RobotName);
-
     return this.robotName;
   }
 
@@ -27,13 +25,17 @@ class Robot {
   nameGenerator() {
     let newName = [];
 
-    for(let i = 0; i < 2; i++) {
-      newName.push(this.alphabet[Math.floor(Math.random()*this.alphabet.length)]);
+    while(this.usedNames.indexOf(newName.join("")) >= 0 || newName.length == 0){
+      for(let i = 0; i < 2; i++) {
+        newName.push(this.alphabet[Math.floor(Math.random()*this.alphabet.length)]);
+      }
+
+      for(let i = 0; i < 3; i++) {
+        newName.push(this.numbers[Math.floor(Math.random()*this.numbers.length)]);
+      }
     }
 
-    for(let i = 0; i < 3; i++) {
-      newName.push(this.numbers[Math.floor(Math.random()*this.numbers.length)]);
-    }
+    this.usedNames.push(newName.join(""));
 
     return newName.join("");
   }
