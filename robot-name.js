@@ -4,19 +4,21 @@ class Robot {
 
     this.numbers = "1234567890".split("");
 
-    this.usedNames = [];
+    this._name = this.generateName();
+  }
 
-    this.name = this.generateName();
+  get name() {
+    return this._name;
   }
 
   reset() {
-    this.name = this.generateName();
+    this._name = this.generateName();
   }
 
   generateName() {
     let newName = "";
 
-    while(this.usedNames.includes(newName) || newName.length == 0){
+    while(usedRobotNames.has(newName) || newName.length == 0){
       for(let i = 0; i < 2; i++) {
         newName += this.alphabet[Math.floor(Math.random()*this.alphabet.length)];
       }
@@ -26,10 +28,12 @@ class Robot {
       }
     }
 
-    this.usedNames.push(newName);
+    usedRobotNames.add(newName);
 
     return newName;
   }
 }
 
 export default Robot
+
+let usedRobotNames = new Set();
